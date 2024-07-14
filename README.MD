@@ -79,7 +79,7 @@ gcc -o yourprogram -I/path/to/lib/dynafen/ -L/path/to/lib/dynafen/build -ldynafe
 
 ...
 const char* const library1 = "./lib/libmy.1.so";
-const char* const mathlib = "./s";
+const char* const mathlib = "./syslib/libmymath.so";
 vdynafen<> my_void_function(library1, "my_void_function"); // equals to `void my_void_function(void)`
 
 vdynafen<int> my_void_int_function(library1, "my_void_int_function"); // equals to `void my_void_int_function(int arg1)`
