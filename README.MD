@@ -1,6 +1,8 @@
 # Dynafen
 C++11 template-based dynamic library function loader. 
 
+Originally made for a personal experimentation and coding practice.
+
 > [!WARNING]
 > So far only supports dynamic library that is compiled from C code or 
 > C++ code that is using `extern "C"`, as only code demangling that is
@@ -19,9 +21,9 @@ C++11 template-based dynamic library function loader.
 ### Requirements
 - CMake 3.10 or later
 - C++ Compiler with C++11 variadic template support
-    - LLVM clang 2.9
-    - GNU gcc 4.4
-    - MSVC 18.0
+    - LLVM clang 2.9 or later
+    - GNU gcc 4.4 or later
+    - MSVC 18.0 (Visual Studio 2013) or later
 - Build system like Ninja, GNU Make or MSBuild
 
 ### Steps
@@ -46,16 +48,21 @@ The Release page only have package for x86-64 Linux build with GCC and Clang.
 ## Exported Functions
 ### `#include <dynafen.hxx>`
 - `vdynafen<Args...>::vdynafen(const char* libPath, const char* symName)`
-    > Construct and load an exported function with void return type named `symName` from dynamic library at `libPath`
+  
+    Construct and load an exported function with void return type named `symName` from dynamic library at `libPath`
 - `void vdynafen<Args..>::operator(Args ...)`
-    > Call the exported function
+    
+    Call the exported function
 - `rdynafen<R, Args...>::rdynafen(const char* libPath, const char* symName)`
-    > Construct and load an exported function with `R` return type named `symName` from dynamic library at `libPath`
+    
+    Construct and load an exported function with `R` return type named `symName` from dynamic library at `libPath`
 - `R vdynafen<R, Args..>::operator(Args ...)`
-    > Call the exported function
+    
+    Call the exported function
 - `bool dynafen_base::valid()`
-    > Check if the pointer is valid, calling invalid pointer may cause undefined behaviour, but mostly crash your app.
-    > This call is available for both function classes since `dynafen_base` is it's base class.
+    
+    Check if the pointer is valid, calling invalid pointer may cause undefined behaviour, but mostly crash your app.
+    This call is available for both function classes since `dynafen_base` is it's base class.
 
 ## Adding to your Program
 ```bash
@@ -97,6 +104,11 @@ if(my_getter.valid())
 
 ## Dependencies
 Only C++11 Standard Library and platform-specific dynamic loader.
+
+## See Also
+- [martin-olivier/dylib](https://github.com/martin-olivier/dylib) project
+  
+  More featured, more OOP-based approach, overall a better library.
 
 ## License
 MIT License ( See [LICENSE](LICENSE) )
