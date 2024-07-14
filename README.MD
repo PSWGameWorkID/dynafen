@@ -6,6 +6,15 @@ C++11 template-based dynamic library function loader.
 > C++ code that is using `extern "C"`, as only code demangling that is
 > available during runtime, but not code mangling.
 
+## Features
+- Cross-platform
+- Library handle is reference counted
+  > Meaning a loaded library will be unloaded if no function in it is no longer needed.
+- Simple function construction.
+- Simple pointer validity check
+- Call imported function like a normal C++ function
+- Good for IDE autocompletion support
+
 ## Building and Installation
 ### Requirements
 - CMake 3.10 or later
@@ -59,8 +68,14 @@ vdynafen<int> my_void_int_function(library1, "my_void_int_function"); // equals 
 
 rdynafen<int, int, int> my_multiply(mathlib, "my_multiply"); // equals to `int my_multiply(int, int)`
 
-rdynafen<int> my_getter(library1, "my_setter"); // equals to `int my_getter(void)`
+rdynafen<int> my_getter(library1, "my_getter"); // equals to `int my_getter(void)`
 ...
+
+// Call like a C++ function
+my_void_function();
+my_void_int_function(100);
+int s = my_multiply(10, 10);
+int data = my_getter();
 
 // Check if this function valid
 if(my_getter.valid())
