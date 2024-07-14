@@ -3,7 +3,7 @@
 rdynafen<int, int, int> multiply("./libtestlib.so", "multiply");
 vdynafen<int> set("./libtestlib.so", "set");
 rdynafen<int> get("./libtestlib.so", "set");
-vdynafen do_nothing("./libtestlib.so", "do_nothing");
+vdynafen<> do_nothing("./libtestlib.so", "do_nothing");
 
 bool test_1()
 {
