@@ -33,13 +33,15 @@ cd dynafen
 # Build the project ( You can change Ninja to other build system too )
 mkdir build
 cd build
-cmake -B . -S .. -G Ninja
+cmake -B . -S .. -G Ninja -DCMAKE_BUILD_TYPE=MinSizeRel
 ninja
 
 # Install as system library ( Linux only )
 sudo cmake --install .
-
 ```
+
+### Prebuilt 
+The Release page only have package for x86-64 Linux build with GCC and Clang.
 
 ## Exported Functions
 ### `#include <dynafen.hxx>`
@@ -55,6 +57,15 @@ sudo cmake --install .
     > Check if the pointer is valid, calling invalid pointer may cause undefined behaviour, but mostly crash your app.
     > This call is available for both function classes since `dynafen_base` is it's base class.
 
+## Adding to your Program
+```bash
+# Using installed library
+gcc -o yourprogram -ldynafen "main.cpp"
+
+# Using built library, but not installed
+gcc -o yourprogram -I/path/to/lib/dynafen/ -L/path/to/lib/dynafen/build -ldynafen "main.cpp"
+```
+
 ## Example
 ```cpp
 #include <dynafen.hxx>
@@ -62,7 +73,7 @@ sudo cmake --install .
 ...
 const char* const library1 = "./lib/libmy.1.so";
 const char* const mathlib = "./s";
-vdynafen my_void_function(library1, "my_void_function"); // equals to `void my_void_function(void)`
+vdynafen<> my_void_function(library1, "my_void_function"); // equals to `void my_void_function(void)`
 
 vdynafen<int> my_void_int_function(library1, "my_void_int_function"); // equals to `void my_void_int_function(int arg1)`
 
